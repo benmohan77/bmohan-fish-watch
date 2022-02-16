@@ -1,5 +1,6 @@
 package com.bmohan.fishwatch.di
 
+import com.bmohan.fishwatch.model.ApiService
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
@@ -41,5 +42,10 @@ class ApiModule {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT))
             .build()
+    }
+
+    @Provides
+    fun provideApiService(retrofit: Retrofit) : ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }
